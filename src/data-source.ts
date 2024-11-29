@@ -9,10 +9,14 @@ export const AppDataSource = new DataSource({
   type: 'mysql',
   host: process.env.DB_HOST || 'localhost',
   port: +process.env.DB_PORT || 3306,
-  username: process.env.DB_USERNAME || 'root',
-  password: process.env.DB_PASSWORD || '2wsxzaQ1!',
-  database: process.env.DB_DATABASE || 'rachel',
-  // entities: [Patient, Hospital, User, Disease, State],
+  // username: process.env.DB_USERNAME || 'root',
+  // password: process.env.DB_PASSWORD || '2wsxzaQ1!',
+  // database: process.env.DB_DATABASE || 'rachel',
+  
+  username: process.env.DB_USERNAME || 'dxqhghua_racheleyeemr',
+  password: process.env.DB_PASSWORD || '2wsxzaQ1!6ytrew21!',
+  database: process.env.DB_DATABASE || 'dxqhghua_racheleyeemr',
+
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   migrations: ['src/migrations/*.ts'],  // Use TypeScript migration files
   synchronize: true,
