@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DataSource, ILike, Repository } from 'typeorm';
 import { Patients } from './patients.entity';
@@ -102,28 +102,35 @@ export class PatientsService {
       // }
 
 
-      getAllEncounters(): Promise<Encounters[]> {
-        return this.encountersRepository.find({
+      async getAllEncounters(): Promise<Encounters[]> {
+        try {
+          return await this.encountersRepository.find({
             relations: [
               'patient',
-                'consulting', 
-                'consulting.patient', 
-                'consulting.visualAcuityFarPresentingLeft',
-                'consulting.visualAcuityFarPresentingRight',
-                'consulting.visualAcuityFarPinholeRight',
-                'consulting.visualAcuityFarPinholeLeft',
-                'consulting.visualAcuityFarBestCorrectedLeft',
-                'consulting.visualAcuityFarBestCorrectedRight',
-                'consulting.visualAcuityNearLeft',
-                'consulting.visualAcuityNearRight',
-                'continueConsulting',
-                'continueConsulting.patient',
-                'continueConsulting.chiefComplaintRight',
-                'continueConsulting.chiefComplaintLeft'
-            ]
-           
-        });
-    }
+              'consulting',
+              'consulting.patient',
+              'consulting.visualAcuityFarPresentingLeft',
+              'consulting.visualAcuityFarPresentingRight',
+              'consulting.visualAcuityFarPinholeRight',
+              'consulting.visualAcuityFarPinholeLeft',
+              'consulting.visualAcuityFarBestCorrectedLeft',
+              'consulting.visualAcuityFarBestCorrectedRight',
+              'consulting.visualAcuityNearLeft',
+              'consulting.visualAcuityNearRight',
+              'continueConsulting',
+              'continueConsulting.patient',
+              'continueConsulting.chiefComplaintRight',
+              'continueConsulting.chiefComplaintLeft',
+            ],
+          });
+        } catch (error) {
+          // Log the error for debugging purposes
+          console.error('Error fetching encounters:', error);
+    
+          // Optionally rethrow the error with a specific message or a custom exception
+          throw new InternalServerErrorException('Failed to retrieve encounters. Please try again later.');
+        }
+      }
 
     createVisualAcuityFar(visual_acuity_far: VisualAcuityFar): Promise<VisualAcuityFar> {
       return this.visualAcuityFarRepository.save(visual_acuity_far);
