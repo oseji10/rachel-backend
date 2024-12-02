@@ -32,19 +32,19 @@ dotenv.config();
       // password: process.env.DB_PASSWORD || '2wsxzaQ1!',
       // database: process.env.DB_DATABASE || 'chf',
 
-//       host: "localhost",
-// port: 3306,
-// type: 'mysql',
-// username: "dxqhghua_racheleyeemr",
-// password: "2wsxzaQ1!6ytrew21!",
-// database: "dxqhghua_racheleyeemr",
+      host: "localhost",
+port: 3306,
+type: 'mysql',
+username: "dxqhghua_racheleyeemr",
+password: "2wsxzaQ1!6ytrew21!",
+database: "dxqhghua_racheleyeemr",
 
-      host: 'localhost',
-      port: 3306,
-      type: 'mysql',
-      username: "root",
-      password: "2wsxzaQ1!",
-      database: "rachel",
+      // host: 'localhost',
+      // port: 3306,
+      // type: 'mysql',
+      // username: "root",
+      // password: "2wsxzaQ1!",
+      // database: "rachel",
 
 
 
