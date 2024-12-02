@@ -31,6 +31,11 @@ import { ContinueConsulting } from './continue_consulting.entity';
 
 export class PatientsController {
   constructor(private readonly patientsService: PatientsService) {}
+
+  @Get('encounters')
+  async getAllEncounters() {
+    return this.patientsService.getAllEncounters();
+  }
   
   @Post('visual_acuity_far')
   // @Roles(Role.ADMIN)

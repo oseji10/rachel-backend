@@ -16,7 +16,7 @@ export class ContinueConsulting {
 
   @ManyToOne(() => Patients, (patients) => patients.id, { nullable: true })
   @JoinColumn({ name: 'patientId' })
-  patientId: Patients | null;
+  patient: Patients | null;
 
   // @IsOptional()
   // @ManyToOne(() => Encounters, (encounter) => encounter.encounterId, { nullable: true })
@@ -37,12 +37,12 @@ encounterId: Encounters | number | null; // Accepts both Encounters entity or en
   intraOccularPressureLeft: string;
 
   @IsOptional()
-  @ManyToOne(() => ChiefComplaint, (chief_complaint) => chief_complaint.id)
+  @ManyToOne(() => ChiefComplaint, (chief_complaint) => chief_complaint.id, { nullable: true, eager: true })
   @JoinColumn({ name: 'chiefComplaintRight' })  
   chiefComplaintRight: ChiefComplaint;
 
   @IsOptional()
-  @ManyToOne(() => ChiefComplaint, (chief_complaint) => chief_complaint.id)
+  @ManyToOne(() => ChiefComplaint, (chief_complaint) => chief_complaint.id, { nullable: true, eager: true })
   @JoinColumn({ name: 'chiefComplaintLeft' })  
   chiefComplaintLeft: ChiefComplaint;
 

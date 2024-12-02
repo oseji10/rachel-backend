@@ -20,10 +20,10 @@ export class Users {
   @PrimaryGeneratedColumn()  // Auto-increment primary key
   userId: number;
 
-  @Column({ type: 'varchar', length: 255, unique: true })  // Specify type and uniqueness for MySQL
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: true })  // Specify type and uniqueness for MySQL
   email: string;
 
-  @Column({ type: 'varchar', length: 255 })  // Specify type for password
+  @Column({ type: 'varchar', length: 255, nullable: true })  // Specify type for password
   password: string;
 
   // @Column({ type: 'varchar', length: 50, nullable: true, unique: true })  // Specify type and length for username

@@ -20,24 +20,19 @@ export class Encounters {
 
 
   @ManyToOne(() => Patients, (patients) => patients.id, { nullable: true })
-  @JoinColumn({ name: 'patientId' })
-  patientId: Patients | null;
+  @JoinColumn({ name: 'patient' })
+  patient: Patients | null;
 
  
 
- @OneToOne(() => Consulting, (consulting) => consulting.consultingId, { eager: false })
+ @OneToOne(() => Consulting, (consulting) => consulting.consultingId, { eager: true })
 @JoinColumn({ name: 'consultingId' })
-consultingId: Consulting | null;
+consulting: Consulting | null;
 
 
-  // @OneToOne(() => ContinueConsulting, (continue_consulting) => continue_consulting.continueConsultingId)
-  // @JoinColumn({ name: 'continueConsultingId' })  
-  // continueConsultingId: ContinueConsulting | null;
-
-
-  @OneToOne(() => ContinueConsulting, (continue_consulting) => continue_consulting.continueConsultingId)
+  @OneToOne(() => ContinueConsulting, (continue_consulting) => continue_consulting.continueConsultingId, { eager: true })
 @JoinColumn({ name: 'continueConsultingId' })
-continueConsultingId: ContinueConsulting | number | null; // Accepting either ContinueConsulting or its ID
+continueConsulting: ContinueConsulting | number | null; // Accepting either ContinueConsulting or its ID
 
 
 

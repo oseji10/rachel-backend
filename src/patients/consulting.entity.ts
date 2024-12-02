@@ -12,7 +12,7 @@ export class Consulting {
 
   @ManyToOne(() => Patients, (patients) => patients.id, { nullable: true })
   @JoinColumn({ name: 'patientId' })
-  patientId: Patients | null;
+  patient: Patients | null;
 
   @IsOptional()
   @ManyToOne(() => Encounters, (encounter) => encounter.encounterId, { nullable: true })
@@ -20,42 +20,42 @@ export class Consulting {
   encounterId: Encounters | number | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true })
   @JoinColumn({ name: 'visualAcuityFarPresentingLeft' })
   visualAcuityFarPresentingLeft: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true })
   @JoinColumn({ name: 'visualAcuityFarPresentingRight' })
   visualAcuityFarPresentingRight: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityFarPinholeRight' })
   visualAcuityFarPinholeRight: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityFarPinholeLeft' })
   visualAcuityFarPinholeLeft: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityFarBestCorrectedLeft' })
   visualAcuityFarBestCorrectedLeft: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityFar, (visualAcuityFar) => visualAcuityFar.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityFarBestCorrectedRight' })
   visualAcuityFarBestCorrectedRight: VisualAcuityFar | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityNear, (visualAcuityNear) => visualAcuityNear.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityNear, (visualAcuityNear) => visualAcuityNear.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityNearLeft' })
   visualAcuityNearLeft: VisualAcuityNear | null;
 
   @IsOptional()
-  @ManyToOne(() => VisualAcuityNear, (visualAcuityNear) => visualAcuityNear.id, { nullable: true })
+  @ManyToOne(() => VisualAcuityNear, (visualAcuityNear) => visualAcuityNear.id, { nullable: true, eager: true  })
   @JoinColumn({ name: 'visualAcuityNearRight' })
   visualAcuityNearRight: VisualAcuityNear | null;
 

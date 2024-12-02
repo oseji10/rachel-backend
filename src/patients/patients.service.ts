@@ -85,6 +85,48 @@ export class PatientsService {
     }
     
 
+       // Find all encounters
+      //  getAllEncounters(): Promise<Encounters[]> {
+      //   return this.encountersRepository.createQueryBuilder('encounters')
+      //     .leftJoinAndSelect('consulting.encounter', 'doctor')
+      //     .leftJoinAndSelect('doctor.doctors', 'doctors')
+      //     .leftJoinAndSelect('patient.user', 'user')
+      //     .select([
+      //       'encounters',            // Select all fields of patient
+      //       'doctor.userId',          // Select specific fields from doctor
+      //       'doctors.doctorName',
+      //       'user.phoneNumber',
+      //       'user.email'
+      //     ])
+      //     .getMany();
+      // }
+
+
+      getAllEncounters(): Promise<Encounters[]> {
+        return this.encountersRepository.find({
+            relations: [
+              'patient',
+                'consulting', 
+                'consulting.patient', 
+                'consulting.visualAcuityFarPresentingLeft',
+                'consulting.visualAcuityFarPresentingRight',
+                'consulting.visualAcuityFarPinholeRight',
+                'consulting.visualAcuityFarPinholeLeft',
+                'consulting.visualAcuityFarBestCorrectedLeft',
+                'consulting.visualAcuityFarBestCorrectedRight',
+                'consulting.visualAcuityNearLeft',
+                'consulting.visualAcuityNearRight',
+                'continueConsulting',
+                'continueConsulting.patient',
+                'continueConsulting.chiefComplaintRight',
+                'continueConsulting.chiefComplaintLeft'
+            ],
+           
+
+            // }
+        });
+    }
+
     createVisualAcuityFar(visual_acuity_far: VisualAcuityFar): Promise<VisualAcuityFar> {
       return this.visualAcuityFarRepository.save(visual_acuity_far);
     }
@@ -159,7 +201,7 @@ findAllChiefComplaint(): Promise<ChiefComplaint[]> {
 async createConsulting(consulting: Consulting): Promise<Consulting & { encounterId?: number }> {
   // Remove null or undefined properties from the consulting object
   const sanitizedConsulting = {
-    patientId: consulting.patientId || null,
+    patientId: consulting.patient || null,
     encounterId: consulting.encounterId || null,
     visualAcuityFarPresentingLeft: consulting.visualAcuityFarPresentingLeft || null,
     visualAcuityFarPresentingRight: consulting.visualAcuityFarPresentingRight || null,
@@ -178,12 +220,12 @@ async createConsulting(consulting: Consulting): Promise<Consulting & { encounter
   let encounterId: number | undefined;
 
   // Check if required fields for encounter creation exist
-  if (consulting.patientId) {
+  if (consulting.patient) {
     // Create a new encounter and associate it with the saved consulting
     const encounter = new Encounters();
-    encounter.consultingId = savedConsulting; // Associate the consulting record
+    encounter.consulting = savedConsulting; // Associate the consulting record
     encounter.status = 1;
-    encounter.patientId = consulting.patientId;
+    encounter.patient = consulting.patient;
 
     // Save the encounter record
     const savedEncounter = await this.encountersRepository.save(encounter);
@@ -219,7 +261,7 @@ async createContinueConsulting(continue_consulting: ContinueConsulting): Promise
   try {
     // Step 1: Create the continueConsulting record
     const sanitizedContinueConsulting = {
-      patientId: continue_consulting.patientId || null,
+      patientId: continue_consulting.patient || null,
       encounterId: continue_consulting.encounterId || null,
       chiefComplaintRight: continue_consulting.chiefComplaintRight || null,
       chiefComplaintLeft: continue_consulting.chiefComplaintLeft || null,
@@ -268,7 +310,7 @@ const encounter = await queryRunner.manager.findOne(Encounters, {
     // Step 3: If the encounter is found, update the encounter with the continueConsultingId
     if (encounter) {
       // Correctly assign only the continueConsultingId (number) to encounter.continueConsultingId
-      encounter.continueConsultingId = savedContinueConsulting.continueConsultingId; // Use the number field
+      encounter.continueConsulting = savedContinueConsulting.continueConsultingId; // Use the number field
 
       // Save the updated encounter record
       await queryRunner.manager.save(Encounters, encounter);
