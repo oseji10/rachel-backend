@@ -20,7 +20,7 @@ export class Encounters {
 
 
   @ManyToOne(() => Patients, (patients) => patients.id, { nullable: true })
-  @JoinColumn({ name: 'patient' })
+  @JoinColumn({ name: 'patientId' })
   patient: Patients | null;
 
  
