@@ -120,10 +120,8 @@ export class PatientsService {
                 'continueConsulting.patient',
                 'continueConsulting.chiefComplaintRight',
                 'continueConsulting.chiefComplaintLeft'
-            ],
+            ]
            
-
-            // }
         });
     }
 
